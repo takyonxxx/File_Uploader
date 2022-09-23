@@ -1,0 +1,53 @@
+{
+  "name": "DEMO-Crud",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "@types/core-js": "^2.5.5",
+    "@vue/composition-api": "^1.4.0-beta.0",
+    "axios": "^0.21.1",
+    "core-js": "^3.18.1",
+    "d3": "^7.3.0",
+    "echarts": "^5.2.2",
+    "humanize-duration": "^3.27.1",
+    "luxon": "^2.0.2",
+    "reconnecting-websocket": "^4.4.0",
+    "regenerator-runtime": "^0.13.9",
+    "roboto-fontface": "^0.10.0",
+    "sails": "^1.4.4",
+    "vee-validate": "^3.4.12",
+    "vue": "^2.6.11",
+    "vue-clamp": "^0.4.0",
+    "vue-cookies": "^1.7.4",
+    "vue-echarts": "^6.0.0",
+    "vue-json-to-csv": "^1.1.8",
+    "vue-router": "^3.2.0",
+    "vuetify": "^2.4.0",
+    "vuex": "^3.4.0"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-plugin-router": "~4.5.0",
+    "@vue/cli-plugin-vuex": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "@vue/composition-api": "^1.4.6",
+    "@vue/eslint-config-prettier": "^6.0.0",
+    "axios": "^0.21.4",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^6.7.2",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-vue": "^6.2.2",
+    "prettier": "^2.2.1",
+    "sass": "~1.32.0",
+    "sass-loader": "^10.0.0",
+    "vue-cli-plugin-vuetify": "~2.4.2",
+    "vue-template-compiler": "^2.6.11",
+    "vuetify-loader": "^1.7.0"
+  }
+}

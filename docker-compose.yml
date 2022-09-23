@@ -1,0 +1,50 @@
+version: "3.7"
+
+services:
+  nginx:
+    build: nginx
+    ports:
+      - "80:80"
+      - "443:443"
+  frontend:
+    build:
+      context: ./frontend
+      network: host
+    environment:
+      NODE_ENV: development
+    volumes:
+      - ./frontend:/code
+      - /code/node_modules
+  backend:
+    build:
+      context: .
+      network: host
+    depends_on:
+      - db
+    entrypoint: ./docker-entrypoint.sh
+    environment:
+      DEBUG: "true"
+      RUN_FLAG: "DEV"
+      DB_LOCATION: "db"
+      BROKER_HOST: "broker"
+      BROKER_KEY: "redis"
+    volumes:
+      - .:/code
+  db:
+    image: postgres
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+  broker:
+    image: redis
+    command: >
+      --requirepass redis
+  samba:
+    build: ./samba_test_server
+    volumes:
+      - ./samba_test_server/shared_files:/Shared
+#    ports:
+#      - "139:139"
+#      - "445:445"
+#      - "1433:1433"

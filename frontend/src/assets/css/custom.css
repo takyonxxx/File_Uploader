@@ -1,0 +1,57 @@
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0px 1000px #ffffff inset;
+}
+.clamp-1 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+}
+
+.v-data-table > .v-data-table__wrapper > table > tbody > tr > td.wrap {
+      max-width: 1px;
+    }
+.pointer{
+    cursor:pointer;
+}
+.pointer:hover{
+    opacity: .8;
+}
+.nohover.theme--light.v-data-table > .v-data-table__wrapper > table > tbody > tr:hover:not(.v-data-table__expanded__content):not(.v-data-table__empty-wrapper) {
+    background: initial;
+}
+/*GDPR'daki ilk elemanın yanındaki rakamı gizliyor*/
+.v-stepper .v-stepper__step:first-child .v-stepper__step__step {
+    display: none;
+}
+/* td içindeki satırı en sona kadar sığdırıp sonda keser http://jsfiddle.net/7CURQ/*/
+.trim {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 1px;
+}
+/* Risk management sayfasındaki tabloların gösterimi için : */
+.risk-level-1{
+  background-color: #76e143
+}
+.risk-level-2{
+  background-color: #fdc801
+}
+.risk-level-3{
+  background-color: #f47819
+}
+.risk-level-4{
+  background-color: #fd0001
+}
+.risk-level-5{
+  background-color: #ca0001
+}
