@@ -1,1 +1,0 @@
-{"data": {"machine_id": "cfa10d7f"}}
