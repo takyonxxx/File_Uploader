@@ -1,2 +1,2 @@
 # Django Samba File Uploader Elasticsearch
- Dlango Samba File Uploader wşth Elasticsearch (under construction)
+ Dlango Samba File Uploader with Elasticsearch (under construction)
