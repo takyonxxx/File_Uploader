@@ -6,6 +6,14 @@ services:
     ports:
       - "80:80"
       - "443:443"
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: db
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+    ports:
+      - "5432:5432"
   frontend:
     build:
       context: ./frontend
@@ -30,12 +38,6 @@ services:
       BROKER_KEY: "redis"
     volumes:
       - .:/code
-  db:
-    image: postgres
-    environment:
-      POSTGRES_DB: postgres
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
   broker:
     image: redis
     command: >

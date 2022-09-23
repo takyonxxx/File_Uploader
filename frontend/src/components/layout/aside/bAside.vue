@@ -86,7 +86,7 @@ export default {
         url: "/scan",
       },
       {
-        title: "Repositories",
+        title: "Samba Repositories",
         icon: "mdi-source-repository-multiple",
         url: "/repositories",
       },

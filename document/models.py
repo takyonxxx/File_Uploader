@@ -185,7 +185,7 @@ class RepositoryItemType(models.Model):
 class ConnectionInfo(models.Model):
     connection_property = models.ForeignKey(ConnectionPropertyType, on_delete=models.CASCADE, null=True)
     repository = models.ForeignKey(Repository, related_name='fields', on_delete=models.CASCADE, null=True)
-    value = models.CharField(max_length=255, null=True)
+    value = models.CharField(max_length=255, default="smb://samba/guest", null=True)
 
     class Meta:
         db_table = 'connections'

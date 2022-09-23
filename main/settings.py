@@ -17,9 +17,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Quick-start development siteSettings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
-
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'tJqV5fYo3crpL1+JI2kcCyTOACp81WFWRNQ2r8dET8M='
 
@@ -111,9 +108,9 @@ CONN_MAX_AGE = 300
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
+        'NAME': 'db',
+        'USER': 'admin',
+        'PASSWORD': 'admin',
         'HOST': os.environ.get('DB_LOCATION', 'localhost'),
         'PORT': '5432',
     }
