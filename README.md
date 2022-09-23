@@ -1,2 +1,2 @@
-# django_samba_file_uploader
+# Django Samba File Uploader
  Dlango Samba File Uploader Elasticsearch 
