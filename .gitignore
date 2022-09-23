@@ -23,7 +23,4 @@ venv/
 *.ini
 *.bin
 *.npy
-/document/datasets/word2.model
-/frontend/yarn.lock
-/document/datasets/cc.tr.300.bin
-/document/datasets/model_file_content_vector.model.wv.vectors_ngrams.npy
+/frontend/yarn.lockpy
