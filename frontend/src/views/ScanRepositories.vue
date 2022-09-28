@@ -211,6 +211,7 @@ export default {
     scanning: false,
     infoMessage: [],
     snackbar: false,
+    modalShow: false
   }),
   selectedFileName: "",
   methods: {
@@ -257,7 +258,7 @@ export default {
           });
     },
     async confirmAbortOperations(message) {
-        this.abortOperations();
+      this.abortOperations();
     },
     abortOperations() {
       this.loading = true;
@@ -336,8 +337,7 @@ export default {
             search: this.searchText,
           })
           .then(({data}) => {
-            if(data.status)
-            {
+            if (data.status) {
               this.fetchItems()
             }
             this.items = data.result;

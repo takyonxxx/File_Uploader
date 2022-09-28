@@ -12,7 +12,9 @@ import { toast } from "@/mixins/toastMixin";
 import { helpers } from "@/mixins/helpers";
 import "@/assets/css/custom.css";
 import { socket } from "@/plugins/webSocket";
+import BootstrapVue from 'bootstrap-vue';
 
+Vue.use(BootstrapVue);
 Vue.prototype.axios = $axios;
 Vue.prototype.$luxon = DateTime;
 Vue.prototype.$toast = toast;

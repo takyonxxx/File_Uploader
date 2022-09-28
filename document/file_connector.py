@@ -18,9 +18,6 @@ from document.models import Document, RepositoryMetadata
 from document.utils import get_file_uploader, read_configuration
 from main.consumers import NotificationConsumer as ws
 
-exclude_extensions, max_file_size = read_configuration()
-exclude_extensions_list = exclude_extensions.split(',')
-
 
 def convert_size(size_bytes):
     if size_bytes == 0:
@@ -191,14 +188,6 @@ class FileConnector(threading.Thread):
                     if f_name.startswith('.'):
                         continue
 
-                    file_only_name, file_extension = os.path.splitext(f_name)
-
-                    if file_extension.upper() in exclude_extensions_list:
-                        continue
-
-                    if f.get_filesize() > max_file_size:
-                        continue
-
                     self.repo_doc_total_number += 1
                     self.repo_doc_total_size += f.get_filesize()
 
@@ -248,15 +237,7 @@ class FileConnector(threading.Thread):
                              'last_access_time': f.get_atime_epoch(),
                              'create_time': f.get_ctime_epoch()}
 
-                file_only_name, file_extension = os.path.splitext(f_name)
-
-                if file_extension.upper() in exclude_extensions_list:
-                    self.print(f'File type {file_extension} not allowed for {f_name}')
-                    continue
-
-                if f.get_filesize() > max_file_size:
-                    self.print(f'File size over {max_file_size} not allowed for {f_name}')
-                    continue
+                # file_only_name, file_extension = os.path.splitext(f_name)
 
                 file_dir_path = share_path + '/' + top
                 file_dir_path = file_dir_path[:-2]

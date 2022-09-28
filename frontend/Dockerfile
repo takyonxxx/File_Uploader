@@ -1,5 +1,5 @@
 FROM node:14
-
+#RUN yarn add vue bootstrap bootstrap-vue
 RUN mkdir /code
 WORKDIR /code
 

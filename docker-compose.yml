@@ -20,6 +20,7 @@ services:
       network: host
     environment:
       NODE_ENV: development
+      CHOKIDAR_USEPOLLING: "true"
     volumes:
       - ./frontend:/code
       - /code/node_modules
@@ -36,6 +37,7 @@ services:
       DB_LOCATION: "db"
       BROKER_HOST: "broker"
       BROKER_KEY: "redis"
+      CHOKIDAR_USEPOLLING: "true"
     volumes:
       - .:/code
   broker:
