@@ -20,6 +20,28 @@
         <template v-slot:top>
           <v-toolbar dense flat>
             <v-row>
+              <div class="text-center">
+                <v-dialog v-model="dialog">
+                  <v-card
+                      class="blue-grey lighten-5"
+                      outlined
+                      v-if="fileDetails !== null"
+                  >
+                    <v-toolbar flat color="blue-grey lighten-1" dark>
+                      <v-icon left>mdi-file-outline</v-icon>
+                      File Details - {{ selectedFileName }}</v-toolbar
+                    >
+                    <v-card-text
+                        class="text-block"
+                        style="overflow-wrap: anywhere"
+                        v-html="formatText(fileDetails)"
+                    ></v-card-text>
+                    <v-card-actions>
+                      <v-btn color="primary" block @click="dialog = false">Close Content</v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </v-dialog>
+              </div>
               <v-col cols="2">
                 <v-btn
                     @click="confirmScan()"
@@ -135,33 +157,16 @@
         </template>
       </v-snackbar>
     </v-col>
-    <v-col>
-      <v-card
-          class="blue-grey lighten-5"
-          outlined
-          v-if="fileDetails !== null"
-      >
-        <v-toolbar flat color="blue-grey lighten-1" dark
-        >
-          <v-icon left>mdi-file-outline</v-icon>
-          File Details -
-          <strong class="ml-2">{{ selectedFileName }}</strong></v-toolbar
-        >
-        <v-card-text
-            class="text-block"
-            style="overflow-wrap: anywhere"
-            v-html="formatText(fileDetails)"
-        ></v-card-text>
-      </v-card>
-    </v-col>
   </v-row>
 </template>
+
 <script>
 import {crudMixin} from "@/mixins/crudMixin";
 import {helpers} from "@/mixins/helpers";
 import DmCheckBox from "../components/common/form/DmCheckBox";
 import ConfirmDialog from "@/components/dialogs/bConfirmDialog";
 import {mapGetters, mapMutations} from "vuex";
+
 
 export default {
   name: "ScanRepositories",
@@ -211,7 +216,7 @@ export default {
     scanning: false,
     infoMessage: [],
     snackbar: false,
-    modalShow: false
+    dialog: false,
   }),
   selectedFileName: "",
   methods: {
@@ -318,6 +323,7 @@ export default {
     fetchFileData(id, name) {
       this.selectedFileName = name;
       this.fileDetails = null
+      this.dialog = true
       this.axios
           .post("get_document_content/", {id: id})
           .then(({data}) => {
