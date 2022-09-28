@@ -90,7 +90,7 @@ class DocumentViewSet(BaseViewSet):
     def list(self, request, *args, **kwargs):
         if request.data.get('disable_manuel_data'):
             documents = Document.objects.exclude(
-                source__in=['PhysicalConnector', 'DummyConnector']
+                source__in=['DummyConnector']
             )
         else:
             documents = Document.objects.all()
@@ -130,7 +130,6 @@ class RepositoryViewSet(BaseViewSet):
 @api_view(['POST'])
 @permission_classes([
     IsAuthenticated,
-    FunctionPermission(['writeSegment', 'writeCluster']),
 ])
 def delete_files(request):
     params = json.loads(request.body.decode('utf-8'))
@@ -151,8 +150,6 @@ def delete_files(request):
 @permission_classes([
     IsAuthenticated,
     FunctionPermission([
-        'writeSegment',
-        'writeCluster',
         'readRepository'
     ]),
 ])
@@ -205,3 +202,15 @@ def get_cached_status(request):
         logger.debug(f'{status_name} is already in progress')
         in_progress = True
     return Response({'status': in_progress}, status=status.HTTP_200_OK)
+
+
+@api_view(['POST'])
+@permission_classes([
+    IsAuthenticated,
+])
+def search_elastic(request):
+    search_key = request.data.get('key')
+    documents =  Document.objects.filter(id=1).all()
+    serializer = DocumentSerializer(documents, many=True)
+    doc_result = {'total':len(documents), 'result': serializer.data}
+    return Response(doc_result)

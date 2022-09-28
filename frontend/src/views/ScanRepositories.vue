@@ -18,6 +18,28 @@
         }"
       >
         <template v-slot:top>
+          <v-toolbar>
+            <v-row>
+              <v-col cols="auto">
+                <v-text-field
+                    label="Elastic search text"
+                    color="green"
+                    v-model="searchInput"
+                    @keypress.enter="searchElastic()">
+                  <template v-slot:append>
+                    <v-btn
+                        elevation="0"
+                        color="green"
+                        class="white--text"
+                        @click="searchElastic()">
+                      <v-icon class="mr-3">mdi-text-search-variant</v-icon>
+                      Search
+                    </v-btn>
+                  </template>
+                </v-text-field>
+              </v-col>
+            </v-row>
+          </v-toolbar>
           <v-toolbar dense flat>
             <v-row>
               <div class="text-center">
@@ -29,7 +51,8 @@
                   >
                     <v-toolbar flat color="blue-grey lighten-1" dark>
                       <v-icon left>mdi-file-outline</v-icon>
-                      File Details - {{ selectedFileName }}</v-toolbar
+                      File Details - {{ selectedFileName }}
+                    </v-toolbar
                     >
                     <v-card-text
                         class="text-block"
@@ -42,7 +65,7 @@
                   </v-card>
                 </v-dialog>
               </div>
-              <v-col cols="2">
+              <v-col cols="auto">
                 <v-btn
                     @click="confirmScan()"
                     color="primary"
@@ -51,7 +74,6 @@
                     :disabled="scanning"
                 >
                   <v-icon class="mr-3">mdi-text-search-variant</v-icon>
-
                   Scan Repositories
                 </v-btn>
               </v-col>
@@ -167,7 +189,6 @@ import DmCheckBox from "../components/common/form/DmCheckBox";
 import ConfirmDialog from "@/components/dialogs/bConfirmDialog";
 import {mapGetters, mapMutations} from "vuex";
 
-
 export default {
   name: "ScanRepositories",
   components: {DmCheckBox, ConfirmDialog},
@@ -212,6 +233,7 @@ export default {
     sourceIcons: {
       FileConnector: "mdi-folder-outline",
     },
+    searchInput: '',
     fileDetails: null,
     scanning: false,
     infoMessage: [],
@@ -355,6 +377,17 @@ export default {
           })
           .finally(() => {
             this.loading = false;
+          });
+    },
+    searchElastic() {
+      this.axios
+          .post("search_elastic/", {key: this.searchInput})
+          .then(({data}) => {
+            this.items = data.result;
+            this.total = data.total;
+          })
+          .catch((e) => {
+            this.handleError(e);
           });
     },
     socketTest() {
