@@ -67,7 +67,7 @@ class ScheduleControl:
             last_access = datetime.fromtimestamp(last_access / 1e3)
             log_start = datetime.fromtimestamp(log_start / 1e3)
             # print(log_start.strftime('%Y-%m-%d %H:%M:%S'), last_access.strftime('%Y-%m-%d %H:%M:%S'))
-
+            print(ip_address, last_access)
             try:
                 AuditLogs.objects.create(
                     id=log_id,
@@ -78,6 +78,5 @@ class ScheduleControl:
                     user_id=user_id,
                     username=username
                 )
-                print(ip_address, last_access)
             except Exception as ex:
                 pass
