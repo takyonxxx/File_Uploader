@@ -3,11 +3,7 @@
 import os
 from pathlib import Path
 
-from document.lemmatizer import Lemmatizer
-
 from document.models import Document
-
-lemmatizer = Lemmatizer()
 
 ROOT_PATH = Path(__file__).resolve().parents[1]
 DOCUMENT_PATH = ROOT_PATH / 'document'

@@ -1,7 +1,6 @@
 import json
 import logging
 import multiprocessing
-import time
 
 from django.core.cache import cache
 from rest_framework import status, viewsets
@@ -11,7 +10,6 @@ from rest_framework.response import Response
 
 from connection.serializers import RepositorySerializer
 from document.connectors import stop_connectors, update_connections_thread
-from document.file_connector import FileConnector
 from document.models import Document, Repository
 from document.serializers import (DocumentSerializer)
 from main.base_view import BaseViewSet
@@ -210,7 +208,7 @@ def get_cached_status(request):
 ])
 def search_elastic(request):
     search_key = request.data.get('key')
-    documents =  Document.objects.filter(id=1).all()
+    documents = Document.objects.filter(id=1).all()
     serializer = DocumentSerializer(documents, many=True)
-    doc_result = {'total':len(documents), 'result': serializer.data}
+    doc_result = {'total': len(documents), 'result': serializer.data}
     return Response(doc_result)

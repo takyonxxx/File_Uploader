@@ -79,6 +79,30 @@
               </v-col>
               <v-col cols="auto">
                 <v-btn
+                    @click="start_logs_scheduler()"
+                    color="primary"
+                    elevation="0"
+                    :loading="scanning"
+                    :disabled="scanning"
+                >
+                  <v-icon class="mr-3">mdi-text-search-variant</v-icon>
+                  Start Logs
+                </v-btn>
+              </v-col>
+               <v-col cols="auto">
+                <v-btn
+                    @click="stop_logs_scheduler()"
+                    color="primary"
+                    elevation="0"
+                    :loading="scanning"
+                    :disabled="scanning"
+                >
+                  <v-icon class="mr-3">mdi-text-search-variant</v-icon>
+                  Stop Logs
+                </v-btn>
+              </v-col>
+              <v-col cols="auto">
+                <v-btn
                     @click="confirmDelete()"
                     class="error mr-5"
                     elevation="0"
@@ -256,6 +280,36 @@ export default {
         return item.path.substring(0, item.path.lastIndexOf("/") + 1);
       }
       return item.path;
+    },
+    start_logs_scheduler() {
+      this.loading = true;
+      this.fileDetails = null
+      this.axios
+          .post("start_logs_scheduler/")
+          .then(({data}) => {
+            console.log(data.result)
+          })
+          .catch((e) => {
+            this.handleError(e);
+          })
+          .finally(() => {
+            this.loading = false;
+          });
+    },
+    stop_logs_scheduler() {
+      this.loading = true;
+      this.fileDetails = null
+      this.axios
+          .post("stop_logs_scheduler/")
+          .then(({data}) => {
+            console.log(data.result)
+          })
+          .catch((e) => {
+            this.handleError(e);
+          })
+          .finally(() => {
+            this.loading = false;
+          });
     },
     async confirmDelete(message) {
       if (

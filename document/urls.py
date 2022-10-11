@@ -7,6 +7,8 @@ from main.base_view import create_view_paths
 from . import views
 
 
+
+
 def flatten_list(nested_list):
     return itertools.chain.from_iterable(nested_list)
 

@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-python manage.py makemigrations document user
+python manage.py makemigrations document user jobs
 python manage.py migrate --no-input
 
 python manage.py database_init

@@ -26,3 +26,5 @@ exchangelib
 openpyxl
 jpype1
 impacket
+requests
+pytz
