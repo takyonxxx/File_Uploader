@@ -16,7 +16,7 @@ class ScheduleControl:
         if self.scheduler is None:
             self.scheduler = BackgroundScheduler()
 
-        self.scheduler.add_job(self.read_datas, "interval", seconds=5)
+        self.scheduler.add_job(self.read_datas, "interval", seconds=60)
         self.scheduler.start()
         print("Scheduler started!")
 
@@ -78,5 +78,6 @@ class ScheduleControl:
                     user_id=user_id,
                     username=username
                 )
+                print(ip_address, last_access)
             except Exception as ex:
                 pass

@@ -82,8 +82,7 @@
                     @click="start_logs_scheduler()"
                     color="primary"
                     elevation="0"
-                    :loading="scanning"
-                    :disabled="scanning"
+                    :disabled="logging"
                 >
                   <v-icon class="mr-3">mdi-text-search-variant</v-icon>
                   Start Logs
@@ -94,8 +93,7 @@
                     @click="stop_logs_scheduler()"
                     color="primary"
                     elevation="0"
-                    :loading="scanning"
-                    :disabled="scanning"
+                    :disabled="!logging"
                 >
                   <v-icon class="mr-3">mdi-text-search-variant</v-icon>
                   Stop Logs
@@ -260,6 +258,7 @@ export default {
     searchInput: '',
     fileDetails: null,
     scanning: false,
+    logging: false,
     infoMessage: [],
     snackbar: false,
     dialog: false,
@@ -284,6 +283,7 @@ export default {
     start_logs_scheduler() {
       this.loading = true;
       this.fileDetails = null
+      this.logging = true
       this.axios
           .post("start_logs_scheduler/")
           .then(({data}) => {
@@ -299,6 +299,7 @@ export default {
     stop_logs_scheduler() {
       this.loading = true;
       this.fileDetails = null
+      this.logging = false
       this.axios
           .post("stop_logs_scheduler/")
           .then(({data}) => {
