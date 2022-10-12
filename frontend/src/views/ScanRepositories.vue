@@ -82,7 +82,7 @@
                     @click="start_logs_scheduler()"
                     color="primary"
                     elevation="0"
-                    v-if="logging"
+                    :disabled="logging"
                 >
                   <v-icon class="mr-3">mdi-text-search-variant</v-icon>
                   Start Logs
@@ -93,7 +93,7 @@
                     @click="stop_logs_scheduler()"
                     color="primary"
                     elevation="0"
-                    v-if="!logging"
+                    :disabled="!logging"
                 >
                   <v-icon class="mr-3">mdi-text-search-variant</v-icon>
                   Stop Logs

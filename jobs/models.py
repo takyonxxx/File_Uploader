@@ -4,7 +4,7 @@ from django.db import models
 # Create your models here.
 
 class AuditLogs(models.Model):
-    id = models.CharField(max_length=50, primary_key=True, editable=False)
+    log_id = models.CharField(max_length=50)
     clients = models.JSONField()
     ip_address = models.CharField(max_length=50)
     last_access = models.DateTimeField()

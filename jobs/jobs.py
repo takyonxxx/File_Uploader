@@ -2,6 +2,9 @@ import json
 from datetime import datetime
 import requests
 from apscheduler.schedulers.background import BackgroundScheduler
+import pytz
+from pytz import timezone
+from datetime import datetime
 from pytz import utc
 from jobs.models import AuditLogs
 
@@ -13,12 +16,13 @@ class ScheduleControl:
         self.scheduler.configure(timezone=utc)
 
     def start(self):
-        if self.scheduler is None:
-            self.scheduler = BackgroundScheduler()
-
-        self.scheduler.add_job(self.read_datas, "interval", seconds=60)
-        self.scheduler.start()
-        print("Scheduler started!")
+        self.read_datas()
+        # if self.scheduler is None:
+        #     self.scheduler = BackgroundScheduler()
+        #
+        # self.scheduler.add_job(self.read_datas, "interval", seconds=60)
+        # self.scheduler.start()
+        # print("Scheduler started!")
 
     def stop(self):
         try:
@@ -46,8 +50,8 @@ class ScheduleControl:
 
     def get_audit_logs(self, token):
 
-        url = "https://giris.iys.org.tr/auth/admin/realms/master/clients/c8b3ffd5-afa2-49d7-8a07-6a4088d88b44/user-sessions"
-
+        client_id = '2816fff9-3be6-4b3e-b7dd-595e7a2d3867'  # Admin-cli
+        url = "https://giris.iys.org.tr/auth/admin/realms/master/clients/{}/user-sessions".format(client_id)
         payload = {}
         headers = {
             'Content-Type': 'application/json',
@@ -56,6 +60,8 @@ class ScheduleControl:
 
         response = requests.request("GET", url, headers=headers, data=payload)
         response_array = json.loads(response.text)
+        AuditLogs.objects.all().delete()
+
         for log in response_array:
             clients = log['clients']
             log_id = log['id']
@@ -64,13 +70,17 @@ class ScheduleControl:
             log_start = log['start']
             user_id = log['userId']
             username = log['username']
-            last_access = datetime.fromtimestamp(last_access / 1e3)
-            log_start = datetime.fromtimestamp(log_start / 1e3)
             # print(log_start.strftime('%Y-%m-%d %H:%M:%S'), last_access.strftime('%Y-%m-%d %H:%M:%S'))
-            print(ip_address, last_access)
+
             try:
+                last_access = datetime.fromtimestamp(last_access / 1e3)
+                log_start = datetime.fromtimestamp(log_start / 1e3)
+                utc = pytz.timezone('UTC')
+                turkey = timezone('Europe/Istanbul')
+                last_access = utc.localize(last_access).astimezone(turkey)
+                log_start = utc.localize(log_start).astimezone(turkey)
                 AuditLogs.objects.create(
-                    id=log_id,
+                    log_id=log_id,
                     clients=clients,
                     ip_address=ip_address,
                     last_access=last_access,
@@ -79,4 +89,5 @@ class ScheduleControl:
                     username=username
                 )
             except Exception as ex:
-                pass
+                print(ex)
+        print('{} Logs added to db.'.format(len(response_array)))
