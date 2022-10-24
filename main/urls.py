@@ -22,5 +22,4 @@ urlpatterns = [
     path('api/', include('user.urls')),
     path('api/', include('document.urls')),
     path('api/', include('connection.urls')),
-    path('api/', include('jobs.urls')),
 ]

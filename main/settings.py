@@ -64,7 +64,6 @@ INSTALLED_APPS = [
     'user',
     'document',
     'connection',
-    'jobs',
     'django_apscheduler',
     'channels',
     'mptt'
