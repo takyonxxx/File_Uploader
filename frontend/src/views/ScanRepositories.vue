@@ -79,28 +79,6 @@
               </v-col>
               <v-col cols="auto">
                 <v-btn
-                    @click="start_logs_scheduler()"
-                    color="primary"
-                    elevation="0"
-                    :disabled="logging"
-                >
-                  <v-icon class="mr-3">mdi-text-search-variant</v-icon>
-                  Start Logs
-                </v-btn>
-              </v-col>
-               <v-col cols="auto">
-                <v-btn
-                    @click="stop_logs_scheduler()"
-                    color="primary"
-                    elevation="0"
-                    :disabled="!logging"
-                >
-                  <v-icon class="mr-3">mdi-text-search-variant</v-icon>
-                  Stop Logs
-                </v-btn>
-              </v-col>
-              <v-col cols="auto">
-                <v-btn
                     @click="confirmDelete()"
                     class="error mr-5"
                     elevation="0"
@@ -258,7 +236,6 @@ export default {
     searchInput: '',
     fileDetails: null,
     scanning: false,
-    logging: false,
     infoMessage: [],
     snackbar: false,
     dialog: false,
@@ -279,38 +256,6 @@ export default {
         return item.path.substring(0, item.path.lastIndexOf("/") + 1);
       }
       return item.path;
-    },
-    start_logs_scheduler() {
-      this.loading = true;
-      this.fileDetails = null
-      this.logging = true
-      this.axios
-          .post("start_logs_scheduler/")
-          .then(({data}) => {
-            console.log(data.result)
-          })
-          .catch((e) => {
-            this.handleError(e);
-          })
-          .finally(() => {
-            this.loading = false;
-          });
-    },
-    stop_logs_scheduler() {
-      this.loading = true;
-      this.fileDetails = null
-      this.logging = false
-      this.axios
-          .post("stop_logs_scheduler/")
-          .then(({data}) => {
-            console.log(data.result)
-          })
-          .catch((e) => {
-            this.handleError(e);
-          })
-          .finally(() => {
-            this.loading = false;
-          });
     },
     async confirmDelete(message) {
       if (

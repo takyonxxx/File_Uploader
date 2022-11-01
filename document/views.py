@@ -208,7 +208,8 @@ def get_cached_status(request):
 ])
 def search_elastic(request):
     search_key = request.data.get('key')
-    documents = Document.objects.filter(id=1).all()
+    print(search_key)
+    documents = Document.objects.filter(content=search_key).all()
     serializer = DocumentSerializer(documents, many=True)
     doc_result = {'total': len(documents), 'result': serializer.data}
     return Response(doc_result)

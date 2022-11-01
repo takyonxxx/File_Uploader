@@ -1,10 +1,10 @@
 version: "3.8"
 
 services:
-  postgresql:
+  db:
     image: postgres:14.0
     environment:
-      POSTGRES_DB: postgresql
+      POSTGRES_DB: db
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin
     ports:
@@ -24,12 +24,12 @@ services:
       context: .
       network: host
     depends_on:
-      - postgresql
+      - db
     entrypoint: ./docker-entrypoint.sh
     environment:
       DEBUG: "true"
       RUN_FLAG: "DEV"
-      DB_LOCATION: "postgresql"
+      DB_LOCATION: "db"
       BROKER_HOST: "broker"
       BROKER_KEY: "redis"
       CHOKIDAR_USEPOLLING: "true"
