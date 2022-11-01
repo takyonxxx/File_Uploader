@@ -1,0 +1,13 @@
+print("Hello World!")
+---- load json library from https://github.com/rxi/json.lua
+--json = loadfile("/Users/turkaybiliyor/Desktop/json.lua-master/json.lua")()
+--
+---- get request's payload
+--local payload = '{"test_key" : 101}'
+---- transform json to lua table
+--local request_json = json.decode(payload)
+--if request_json.test_key == 101 then
+--  print("Hello 101!")
+--else
+--  print("Hello not found!")
+--end
